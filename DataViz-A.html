@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script type="text/javascript" src="jquery-2.1.4.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="grayTheme.js"></script>
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+		<style type="text/css">
+			#map {
+				height: 700px;
+                width: 60%;
+                margin: auto;
+                margin-top: 10px;
+			}
+			.leaflet-div-icon {
+				background-color: rgba(0,0,0,0);
+				border-style: none;
+			}
+		</style>
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+		<script type="text/javascript" src="leaflet-openweathermap.js"></script>
+		<link rel="stylesheet" type="text/css" href="leaflet-openweathermap.css">
+    </head>
+    <body style="background-color:rgb(44,44,44)">
+        <script type="text/javascript">
+            //wait for the document to load
+            $(document).ready(function() {
+                //creating variables for holding the data
+                var temp=new Array(100), temp_min=new Array(100), temp_max=new Array(100),
+                    hum=new Array(100),
+                    windspd=new Array(100), winddir=new Array(100), time=new Array(100);
+                
+                //filling with default values
+                temp.fill(25); 
+                temp_min.fill(25); 
+                temp_max.fill(25); 
+                hum.fill(0);
+                windspd.fill(0);
+                winddir.fill(0);
+                time.fill(0);
+                
+                var ajax_call = (function() {
+                    //making an ajax call to request data
+                    $.ajax({
+                        url: "http://api.openweathermap.org/data/2.5/weather?zip=14623,us",
+                        jsonp: "callback",
+                        dataType: "jsonp",
+                        cache:false,
+                        data:{
+                            units : 'metric'
+                        },
+                        success: function(response) {
+                            //on successfully receiving a response - update the chart
+                            if(time.length>100)
+                                time.shift;
+                            time.push(new Date(response.dt * 1000));
+                            
+                            var chart1 = $('#block1').highcharts();
+                            chart1.series[0].addPoint(response.main.humidity, true, true);
+                            chart1.series[1].addPoint(response.main.temp, true, true);
+                            chart1.series[2].addPoint(response.main.temp_min, true, true);
+                            chart1.series[3].addPoint(response.main.temp_max, true, true);
+                        }
+                    });
+                });
+                
+                //function for drawing the chart using Highcharts
+                var drawChart = (function() {
+                        //drawing chart
+                        $('#block1').highcharts({
+                            title: {
+                                text: 'Rochester-Henrietta weather live data',
+                                x: -20
+                            },
+                            subtitle: {
+                                text: 'Source: OpenWeatherMap.org',
+                                x: -20
+                            },
+                            xAxis: {
+                                categories: time
+                            },
+                            yAxis: [{ //first axis
+                                title: {
+                                    text: "Temperature"
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: Highcharts.getOptions().colors[0]
+                                }],
+                                labels: {
+                                    fomart: '{value}°C'
+                                }
+                            }, { //second axis
+                                labels: {
+                                    format: '{value}%'
+                                },
+                                title: {
+                                    text: 'Humidity'
+                                },
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: Highcharts.getOptions().colors[1]
+                                }],
+                                opposite:true
+                            }],
+                            tooltip: {
+                                shared: true
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle',
+                                borderWidth: 0
+                            },
+                            series: [{
+                                name: 'Humidity',
+                                data: hum,
+                                yAxis: 1,
+                                type: 'area',
+                                tooltip: {
+                                    valueSuffix: '%'
+                                }
+                            }, {
+                                name: 'Temperature',
+                                data: temp,
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                }
+                            }, {
+                                name: 'Minimum Temperature',
+                                data: temp_min,
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                }
+                            }, {
+                                name: 'Maximum Temperature',
+                                data: temp_max,
+                                tooltip: {
+                                    valueSuffix: '°C'
+                                }
+                            }]
+                        });
+                    });
+                
+                //function that creates the leaflet map for visualization
+                var mapViz = (function() {
+                    //leaflet stuff
+                    //setting up the map to be displayed
+                    var map = L.map('map').setView([43.157,-77.615],7);
+
+                    var osm = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                        maxZoom:18,
+                        id: 'ndhaijaan.ml5ho873',
+                        accessToken: 'sk.eyJ1IjoibmRoYWlqYWFuIiwiYSI6IjMwZjFkNTQ4Y2YxZGE4YjY2OWU1NTVlNmY3NjE1MGRlIn0.0OfaY-kMBLpjm9L5UaXB5A'
+                    }).addTo(map);
+                    
+                    //creating the cloud layer
+                    var clouds = L.OWM.clouds({interval:2, opacity:0.8}).addTo(map);
+                    //creating the city data layer
+                    var city = L.OWM.current({interval:2, lang:'eng'});
+                    //creating the heatmap overlay layer
+                    var temperature = L.OWM.temperature({interval:2, opacity:0.5});
+
+                    var baseMaps = { "OpenStreetMap":osm};
+                    var overlayMaps = {"Clouds":clouds, "Cities":city, "Temperature":temperature};
+                    //creating a simple layer control menu
+                    var layerControl = L.control.layers(baseMaps,overlayMaps).addTo(map);
+
+                    //function that pans window to selected marker
+                    function pan(e)
+                    {
+                        map.panTo(e.latlng,{animate:true});
+                    }
+                });
+                
+                mapViz();
+                ajax_call();
+                drawChart();
+                setInterval(ajax_call,1000);
+            });
+            
+            
+        </script>
+        <h1 id="title" style="color: white; text-align: center;">Data Visualization A</h1>
+        <h3 style="color: white; text-align: center"> Weather data stream from OpenWeatherMap.org</h3>
+        <div id="block1" style="min-width:310px; width:60%; height:400px; margin: auto; margin-top: 10px;"></div>
+        <div id="map"></div>
+    </body>
+</html>

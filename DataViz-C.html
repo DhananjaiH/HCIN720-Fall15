@@ -1,0 +1,192 @@
+<!-- 
+Assignment 1: C-level work
+
+Visualize at least two columns from the SparkFun weather station data stream in a line graph (time on the x-axis). Display a scale for the axes (e.g. ticks for time on the x-axis). Update the display live, so it adds a new point when it gets new weather data.
+
+This code uses a jQuery ajax call to query data from data.sparkfun (https://data.sparkfun.com/streams/dZ4EVmE8yGCRGx5XRX1W) and then uses highcharts to display 2 charts - (1) Temperature & Humidity level data, (2) Wind data. The graph refreshes the data every minute (which is when new data is uploaded to the stream.) -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="grayTheme.js"></script>
+    </head>
+    <body style="height:100%; width:100%; background-color:rgb(44,44,44);">
+        <script type="text/javascript">
+            var temperature = [], humidity = [], time = [];
+            var windGust = [], windGust10m = [], windSpd = [];
+            
+            //waiting for the page to load before doing stuff
+            $(document).ready(function() {
+
+                //public key for accessing the data stream
+                var public_key = 'dZ4EVmE8yGCRGx5XRX1W';
+                
+                //making the ajax call
+                var ajaxCall = function() {
+                    temperature = [], humidity=[], time = [];
+                    windGust = [], windGust10m = [], windSpd = [];
+                    //ajax call for accessing the data
+                    $.ajax({
+                      url: 'https://data.sparkfun.com/output/' + public_key + '.json', //url
+                      data: {page: 1}, //restricting the data to just one page
+                      dataType: 'jsonp', //specifying the format of the data
+                    }).done(function (results) {
+                          // loop through results and log temperature to the console
+                          $.each(results, function (index, row) {
+                              //console.log(parseFloat(row.tempf));
+                              //console.log(row.measurementTime);
+                              
+                              //time of measurement
+                              time.push(row.measurementTime);
+                              //temperature data in Fahrenheit
+                              temperature.push(parseFloat(row.tempf));
+                              //humidity data
+                              humidity.push(parseFloat(row.humidity));
+                              //wind gust in mph
+                              windGust.push(parseFloat(row.windgustmph));
+                              //wind gust @ 10m in mph
+                              windGust10m.push(parseFloat(row.windgustmph_10m));
+                              //wind speed in mph
+                              windSpd.push(parseFloat(row.windspeedmph));
+
+                              //console.log(time);
+                              //console.log(temperature);
+                          });
+
+                        //Using Highcharts to visualize the data collected
+                        //***********************************************
+                        // Chart #1
+                        $(function () {
+                            $('#Cviz1').highcharts({
+                                title: {
+                                    text: 'Temperature stream data',
+                                    x: -20 //center
+                                },
+                                subtitle: {
+                                    text: 'Source: https://data.sparkfun.com/streams/dZ4EVmE8yGCRGx5XRX1W',
+                                    x: -20
+                                },
+                                xAxis: {
+                                    categories: time
+                                },
+                                yAxis: [{ //first axis
+                                    title: {
+                                        text: 'Temperature'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: Highcharts.getOptions().colors[0]
+                                    }],
+                                    labels: {
+                                        format: '{value}°F'
+                                    }
+                                }, { //second axis
+                                    labels: {
+                                        format: '{value}%'
+                                    },
+                                    title: {
+                                        text: 'Humidity'
+                                    },
+                                    plotLines: [{
+                                        value: 1,
+                                        width: 1,
+                                        color: Highcharts.getOptions().colors[1]
+                                    }],
+                                    opposite:true
+                                }],
+                                tooltip: {
+                                    shared : true
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'middle',
+                                    borderWidth: 0
+                                },
+                                series: [{
+                                    name: 'Temperature',
+                                    data: temperature,
+                                    tooltip: {
+                                        valueSuffix: "°F"
+                                    }
+                                }, {
+                                    name: 'Humidity',
+                                    data: humidity,
+                                    yAxis: 1,
+                                    tooltip: {
+                                        valueSuffix: "%"
+                                    }
+                                }]
+                            });
+                        });
+                        // Chart #1 ends here
+                        //***********************************************
+                        // Chart #2
+                        $(function () {
+                            $('#Cviz2').highcharts({
+                                title: {
+                                    text: 'Wind data stream',
+                                    x: -20 //center
+                                },
+                                subtitle: {
+                                    text: 'Source: https://data.sparkfun.com/streams/dZ4EVmE8yGCRGx5XRX1W',
+                                    x: -20
+                                },
+                                xAxis: {
+                                    categories: time
+                                },
+                                yAxis: { //first axis
+                                    title: {
+                                        text: 'Wind speed (mph)'
+                                    },
+                                    plotLines: [{
+                                        value: 0,
+                                        width: 1,
+                                        color: Highcharts.getOptions().colors[0]
+                                    }],
+                                    labels: {
+                                        format: '{value} mph'
+                                    }
+                                },
+                                tooltip: {
+                                    shared: true,
+                                    valueSuffix: "mph"
+                                },
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'middle',
+                                    borderWidth: 0
+                                },
+                                series: [{
+                                    name: 'Wind gust',
+                                    data: windGust,
+                                    type: 'spline'
+                                }, {
+                                    name: 'Wind gust @ 10m',
+                                    data: windGust10m,
+                                    type: 'spline'
+                                }, {
+                                    name: 'Wind speed',
+                                    data: windSpd,
+                                    type: 'spline'
+                                }]
+                            });
+                        });
+                    });
+                };
+                
+                ajaxCall();
+                setInterval(ajaxCall, 60000);
+            });
+        </script>
+        <h1 style="color: white; text-align: center;">Data Vizualization C</h1>
+        <h3 style="color: white; text-align: center;">Weather data stream from <a href="https://data.sparkfun.com/streams/dZ4EVmE8yGCRGx5XRX1W">data.sparkfun</a></h3>
+        <div id="Cviz1" style="min-width: 310px; width: 50%; height: 400px; float:left;"></div>
+        <div id="Cviz2" style="min-width: 310px; width: 50%; height: 400px; float:left;"></div>
+    </body>
+</html>
