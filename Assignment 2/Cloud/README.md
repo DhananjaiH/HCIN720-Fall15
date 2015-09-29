@@ -33,3 +33,10 @@ NOTE: Of course, this only works for my device and you will have to change this 
 <p>The IR proximity sensor only works reliably with a certain amount of ambient lighting present in the surroundings. The thresholding is not very reliable when there is no sufficient lighting. This could theoretically be improved by supplying more infrared lighting (through an array of IR LEDs).
 
 Also, there is a small delay in controlling the game over the cloud, as it takes some time for the input to reach the game. Thus, the game may not react as quickly as you may move your hand.</p>
+
+<b>References:</b>
+<p>
+<li>Working with server-sent events: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">link</a></li>
+<li><a href="https://github.com/CloudCannon/Dinosaur-Chrome-Game">Google Chrome Dinosaur game</a></li>
+<li>Working with the IR proximity sensor: <a href="http://bildr.org/2011/03/various-proximity-sensors-arduino/">link</a></li>
+</p>
