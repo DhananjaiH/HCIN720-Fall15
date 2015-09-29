@@ -2,6 +2,8 @@
 
 This project uses a circuit build with the <a href="https://www.particle.io/">Particle Photon</a> and visualizes data over the cloud through some interactivity.
 
+Check this link <a href="http://rawgit.com/DhananjaiH/HCIN720-Fall15/master/Assignment%202/Cloud/index.html">here</a>. 
+
 <b>Details</b>
 <p>This circuit uses the <a href="https://www.particle.io/">Particle Photon</a> in combination with an <a href="https://www.sparkfun.com/products/242">IR proximity sensor(GP2Y0A21YK)</a>, which is used for giving simple gesture inputs. A <a href="https://www.sparkfun.com/products/8546">7-segment display</a> is used to provide some on-circuit visualization of the distance of the users hand from the sensor. 
 <br><br>
@@ -24,8 +26,6 @@ For setting the threshold, we first take some readings with the user's hand plac
 Follwing this, some readings are taken without the user's hand above the sensor. Using these readings, we can now segment the values from the IR proximity sensor into 'zones'.
 
 Once the thresholding is performed, the device is ready to use. When the user's hand crosses the threshold, an 'input' is registered. This input is used for controlling a simple game - the 2D Dinosaur side scroller game available on Chrome browsers when there is not internet connectivity. <a href="https://github.com/CloudCannon/Dinosaur-Chrome-Game">Here</a> is a really nice imitation of the game that was used for this. When an 'input' is registered with the device, it sends this information to the Particle cloud. The game runs on the Server-Sent Events from this cloud.
-
-Check this link <a href="http://rawgit.com/DhananjaiH/HCIN720-Fall15/master/Assignment%202/Cloud/index.html">here</a>. 
 
 NOTE: Of course, this only works for my device and you will have to change this for your use.
 
