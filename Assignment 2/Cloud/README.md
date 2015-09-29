@@ -1,9 +1,9 @@
 # Assignment 2 : Interacting with the Photon and visualizing data
 
-This project uses a circuit build with the <a href="">Particle Photon</a> and visualizes data over the cloud through some interactivity.
+This project uses a circuit build with the <a href="https://www.particle.io/">Particle Photon</a> and visualizes data over the cloud through some interactivity.
 
 <b>Details</b>
-<p>This circuit uses the <a href="">Particle Photon</a> in combination with an <a href="">IR proximity sensor(part no)</a>, which is used for giving simple gesture inputs. A <a href="">7-segment display</a> is used to provide some on-circuit visualization of the distance of the users hand from the sensor. 
+<p>This circuit uses the <a href="https://www.particle.io/">Particle Photon</a> in combination with an <a href="https://www.sparkfun.com/products/242">IR proximity sensor(GP2Y0A21YK)</a>, which is used for giving simple gesture inputs. A <a href="https://www.sparkfun.com/products/8546">7-segment display</a> is used to provide some on-circuit visualization of the distance of the users hand from the sensor. 
 
 Here is an image of the of the circuit.
 *some image here*
