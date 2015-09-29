@@ -22,9 +22,9 @@ For setting the threshold, we first take some readings with the user's hand plac
 
 Follwing this, some readings are taken without the user's hand above the sensor. Using these readings, we can now segment the values from the IR proximity sensor into 'zones'.
 
-Once the thresholding is performed, the device is ready to use. When the user's hand crosses the threshold, an 'input' is registered. This input is used for controlling a simple game - the 2D Dinosaur side scroller game available on Chrome browsers when there is not internet connectivity. <a href="">Here</a> is a really nice imitation of the game that was used for this. When an 'input' is registered with the device, it sends this information to the Particle cloud. The game runs on the Server-Sent Events from this cloud.
+Once the thresholding is performed, the device is ready to use. When the user's hand crosses the threshold, an 'input' is registered. This input is used for controlling a simple game - the 2D Dinosaur side scroller game available on Chrome browsers when there is not internet connectivity. <a href="https://github.com/CloudCannon/Dinosaur-Chrome-Game">Here</a> is a really nice imitation of the game that was used for this. When an 'input' is registered with the device, it sends this information to the Particle cloud. The game runs on the Server-Sent Events from this cloud.
 
-Check this link <a href="">here</a>. 
+Check this link <a href="http://rawgit.com/DhananjaiH/HCIN720-Fall15/master/Assignment%202/Cloud/index.html">here</a>. 
 
 NOTE: Of course, this only works for my device and you will have to change this for your use.
 
