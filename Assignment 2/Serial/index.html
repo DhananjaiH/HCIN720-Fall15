@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>RAAWWRRR!</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script>
+		/*var socket = io();
+		//When we get the 'data" message...
+		socket.on('to browser', function(data)
+		{
+			//getting the 'action' messages over serial port
+			// *assumption, that this is the only thing sent over serial port
+			// *any info sent over the serial will trigger the 'jump' action
+			console.log(data);
+		});*/
+		</script>
+	</head>
+	<body>
+		<h1>Dinosaur Game!</h1>
+		<canvas id="game" height="200" width="800"></canvas>
+		<p class="controls">press space bar to start</p>
+
+        <script src="js/helpers.js"></script>
+        <script src="js/objects/game-object.js"></script>
+        <script src="js/objects/cactus.js"></script>
+        <script src="js/objects/dinosaur.js"></script>
+        <script src="js/objects/background.js"></script>
+        <script src="js/objects/score.js"></script>
+        <script src="js/game.js"></script>
+        <script>
+        	new Game({
+        		el: document.getElementById("game")
+        	});
+        </script>
+	</body>
+</html>

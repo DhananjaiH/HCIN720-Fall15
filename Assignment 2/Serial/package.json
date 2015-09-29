@@ -1,0 +1,24 @@
+{
+  "name": "assignment2_helper",
+  "version": "1.0.0",
+  "author": {
+    "name": "Daniel Ashbrook"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "http": "0.0.0",
+    "serialport": "^1.7.4",
+    "socket.io": "^1.3.6"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "gitHead": "0dac97354f51faa154e7025932937351b0133e41",
+  "readme": "#Individual Assignment 2 helper files\nThis repository contains helper files to give you an example of\ncommunicating between your Photon and your web browser via the USB\nport.\n\n##What does it do?\nThe key problem here is how to connect your computer's local resources\n(i.e., the serial port) to the web browser. Because of security\nconcerns, the web browser isn't generally allowed to access hardware\ndirectly. We can use node from the command line to get to the serial\nport using the `serialport` module, but it would be nice to use the\ngraphical capabilities of the browser to do cool stuff like\nvisualizations.\n\nThere are two parts to the code in this repository. One is a web\nserver that runs with node. It talks to the serial port and gets data\nfrom your Photon, Arduino, or whatever else is connected. It then\nsends this data over a _websocket_[^1] to the other part, which is a web\npage loaded in the browser via that web server. In this way, the\nserial port is opened up to the browser, but in a controlled,\nmore-secure manner.\n\n##How to install it?\nCheck out this repository, change into the directory, then run `npm\ninstall` to get the necessary items.\n\n- `blinky.ino`: A file to program onto your Photon. It sends a message\n\tover the serial port every second or two, and blinks the LED.\n- `server.js`: Run this with `node server.js`. It will make a web\n\tserver on port 3000; you can then open\n\t[http://localhost:3000](http://localhost:3000).\n- `index.html`: The file served by the little web server.\n- `package.json`: Contains the information necessary for `npm install`\n\tto work.\n\nThe source code is commented; read it to find out what it's doing.\n\n##Bonus\nAs a bonus, I added `Spark.publish()` calls\n([documentation](https://docs.particle.io/reference/firmware/photon/#spark-publish-))\nto also send data to Particle's cloud. If you have successfully connected\nto the Internet with your Photon, you can use (on Mac at least):\n\n`curl https://api.particle.io/v1/devices/events?access_token=<your\ntoken>`\n\nto see a stream of events from your Photon in real time:\n\n```\nevent: LEDEvent\ndata: {\"data\":\"on\",\"ttl\":\"60\",\"published_at\":\"2015-09-09T21:05:12.415Z\",\"coreid\":\"33001c001747343337363432\"}\n\nevent: LEDEvent\ndata: {\"data\":\"off\",\"ttl\":\"60\",\"published_at\":\"2015-09-09T21:05:14.415Z\",\"coreid\":\"33001c001747343337363432\"}\n\nevent: LEDEvent\ndata: {\"data\":\"on\",\"ttl\":\"60\",\"published_at\":\"2015-09-09T21:05:15.416Z\",\"coreid\":\"33001c001747343337363432\"}\n```\n\nPlease note Particle's limitations on events (from the\ndocumentation page above):\n\n_**NOTE**: Currently, a device can publish at rate of about 1 event/sec,\nwith bursts of up to 4 allowed in 1 second. Back to back burst of 4\nmessages will take 4 seconds to recover._\n\n##Footnotes\n[^1]: A websocket is much like a regular networking socket, but it\n\thappens in the web browser. There are handy libraries like `socket.io`\n\tthat take care of this kind of stuff for you.\n",
+  "readmeFilename": "Readme.md",
+  "description": "This repository contains helper files to give you an example of communicating between your Photon and your web browser via the USB port.",
+  "_id": "assignment2_helper@1.0.0",
+  "_shasum": "9e1f12bc9636b25591071e9a2dcc494e79b152d7",
+  "_from": "git+https://github.com/hcin720-fall15/IA2.git",
+  "_resolved": "git+https://github.com/hcin720-fall15/IA2.git#0dac97354f51faa154e7025932937351b0133e41"
+}
