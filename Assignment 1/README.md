@@ -1,9 +1,4 @@
-# HCIN720-Fall15
-Repository for class projects and assignments
-
-This repo contains files for class assignments and projects
-
-<b>Assignment 1A - Visualizing real-time data</b>
+# Assignment 1A - Visualizing real-time data
 
 - DataViz-A.html : main implementation for this assignment.
 
