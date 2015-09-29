@@ -7,7 +7,7 @@ This project uses a circuit build with the <a href="https://www.particle.io/">Pa
 <br><br>
 Here is an image of the of the circuit.
 <br>
-<img src="https://raw.githubusercontent.com/DhananjaiH/HCIN720-Fall15/master/Assignment%202/Cloud/IMG_20150928_122728.jpg"></img>
+<img src="https://raw.githubusercontent.com/DhananjaiH/HCIN720-Fall15/master/Assignment%202/Cloud/IMG_20150928_122728.jpg" style="height:500px; width:300px;"></img>
 <br><br>
 The 7-segment display shows the user's hand distance in levels (below)</p>
 <pre>
