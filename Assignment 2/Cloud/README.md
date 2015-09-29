@@ -29,6 +29,6 @@ Check this link <a href="http://rawgit.com/DhananjaiH/HCIN720-Fall15/master/Assi
 NOTE: Of course, this only works for my device and you will have to change this for your use.
 
 <b>Challenges</b>
-The IR proximity sensor only works reliably with a certain amount of ambient lighting present in the surroundings. The thresholding is not very reliable when there is no sufficient lighting. This could theoretically be improved by supplying more infrared lighting (through an array of IR LEDs).
+<p>The IR proximity sensor only works reliably with a certain amount of ambient lighting present in the surroundings. The thresholding is not very reliable when there is no sufficient lighting. This could theoretically be improved by supplying more infrared lighting (through an array of IR LEDs).
 
-Also, there is a small delay in controlling the game over the cloud, as it takes some time for the input to reach the game. Thus, the game may not react as quickly as you may move your hand.
+Also, there is a small delay in controlling the game over the cloud, as it takes some time for the input to reach the game. Thus, the game may not react as quickly as you may move your hand.</p>
