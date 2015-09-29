@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script>
+		/*var socket = io();
+		//When we get the 'data" message...
+		socket.on('to browser', function(data)
+		{
+			//Add the message to the #messages list
+			$('#messages').append($('<li>').text(data));
+		});*/
+
+		// getting the data from the particle cloud
+		function handleSparkCloud() {
+				var deviceID = "2c0031000547343339373536";
+				var accessToken = "cb888e910c38bc701de398262df8f2ebcc176e26";
+				var eventSource = new EventSource("https://api.particle.io/v1/devices/events?access_token="+accessToken);
+
+				eventSource.addEventListener('open', function(e) {
+						console.log("Opened!");
+				}, false);
+
+				eventSource.addEventListener('error', function(e) {
+						console.log("Error!");
+				}, false);
+
+				eventSource.addEventListener('input', function(e) {
+					//$('#messages').append($('<li>').text(JSON.parse(e.data)));
+					//console.log("something");
+					console.log("event triggered!");
+				}, false);
+		}
+
+		//Also send some data back once per second
+		/*window.setInterval(
+			function()
+			{
+				var msg = "Hello: " + Math.random();
+				console.log(msg);
+				socket.emit('to serial', msg);
+			},
+			1000
+		);*/
+
+		handleSparkCloud();
+		</script>
+	</head>
+	<body>
+		<ul id="messages"></ul>
+	</body>
+</html>
