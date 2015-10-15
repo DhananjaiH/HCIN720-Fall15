@@ -12,7 +12,9 @@ What I was trying to achieve here was to elevate the i/o elements (7-segment dis
 <pre>
 	<b><i>Lessons learnt:</i></b>
 	Here are some things that I learnt from this activity.
-	<li>The above circuit, while small and seems to be easily adjustable, the design leaves it too exposed. This makes the wire joints vulnerable to damage and easy to break. (As I learnt when I accidentally broke a wire joint on the proximity sensor, rendering it useless.)</li>
+	<li>The above circuit, while small and seems to be easily adjustable, the design leaves it too exposed. 
+		This makes the wire joints vulnerable to damage and easy to break. 
+		(As I learnt when I accidentally broke a wire joint on the proximity sensor, rendering it useless.)</li>
 	<li>Design the final soldered circuit such that the vulnerable wires are protected from damage and do not move much.</li>
 </pre>
 
