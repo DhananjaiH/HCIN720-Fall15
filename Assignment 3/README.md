@@ -6,7 +6,7 @@ This repo contains the files and details on building a case for the circuit made
 In order to make a nice compact case for the circuit in assignment 2, the circuit itself needs some soldering so that it is nice and compact.
 
 Here is an image of the soldered circuit.
-<img src="">
+<img src="https://raw.githubusercontent.com/DhananjaiH/HCIN720-Fall15/master/Assignment%203/IMG_20151015_131533.jpg">
 What I was trying to achieve here was to elevate the i/o elements (7-segment display, potentiometer, switch and the IR proximity sensor) so that they would be slightly higher than the photon. This way, only those components would be exposed outside the box.
 
 <pre>
@@ -20,6 +20,7 @@ What I was trying to achieve here was to elevate the i/o elements (7-segment dis
 Given the nature of the circuit in Assignment 2, 3D printing a case seemed to be the best approach.
 
 The 'case_base_3Dprint.obj' and 'case_lid_3Dprint.stl' were the designs used for this. Below are images that show each of these printed objects.
+<img src="https://raw.githubusercontent.com/DhananjaiH/HCIN720-Fall15/master/Assignment%203/IMG_20151015_131111.jpg">
 
 Base
 I designed the case bottom-up, starting the with the base, or the 'box' part.
@@ -30,7 +31,7 @@ Lid
 I chose to make the lid using <a href="http://www.123dapp.com/design">123D Design</a> as it offers some more complex functionality for 3D design. This was helpful in aligning the screws to the screw-holes made in the base. The design includes appropriate holes for various components.
 
 Here is the complete box.
-<img src="">
+<img src="https://raw.githubusercontent.com/DhananjaiH/HCIN720-Fall15/master/Assignment%203/IMG_20151015_131301.jpg">
 
 <b>Laser Cutting</b>
 I also made a design ('cardboard_case_lasercutter.svg') for a box to be made out of laser cut cardboard pieces. I made use of an old used cardboard box. However, due to the nature of cardboard, it is not strong or robust enough for this purpose. Laser cut wood pieces would make for more suitable material for the case.
